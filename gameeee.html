@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Website for a GitHub Project">
+    <title>GitHub Project Portfolio</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        header {
+            background: #24292e;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin-bottom: 0.5rem;
+        }
+        header nav {
+            margin: 1rem 0;
+        }
+        header nav a {
+            color: #fff;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+        header nav a:hover {
+            border: 1px solid #fff;
+            border-radius: 5px;
+        }
+
+        .hero {
+            background: #0366d6;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        .hero h2 {
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+
+        section {
+            padding: 2rem 1rem;
+        }
+        section h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .about {
+            background: #f4f4f4;
+            text-align: center;
+        }
+        .about p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .projects {
+            background: #fff;
+        }
+        .project-item {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .project-item img {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .project-item .details {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .contact {
+            background: #f4f4f4;
+        }
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact form input,
+        .contact form textarea {
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+        }
+        .contact form button {
+            display: block;
+            width: 100%;
+            padding: 0.7rem;
+            background: #0366d6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .contact form button:hover {
+            background: #005bb5;
+        }
+
+        footer {
+            background: #24292e;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+        footer a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My GitHub Portfolio</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Welcome to My GitHub Portfolio</h2>
+        <p>Discover my latest projects and contributions. Explore my work and get in touch!</p>
+    </div>
+
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <p>I am a passionate developer who loves building meaningful projects. With a strong foundation in coding and design, I aim to deliver impactful solutions through my work.</p>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2>Projects</h2>
+        <div class="project-item">
+            <img src="https://via.placeholder.com/300" alt="Project Image">
+            <div class="details">
+                <h3>Project 1</h3>
+                <p>A web application designed to solve problem X. Built using HTML, CSS, and JavaScript.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+        <div class="project-item">
+            <img src="https://via.placeholder.com/300" alt="Project Image">
+            <div class="details">
+                <h3>Project 2</h3>
+                <p>A mobile app that enhances productivity. Features include task tracking and reminders.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+        <div class="project-item">
+            <img src="https://via.placeholder.com/300" alt="Project Image">
+            <div class="details">
+                <h3>Project 3</h3>
+                <p>A machine learning model to predict outcomes based on dataset Y. Built with Python.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Contact Me</h2>
+        <form action="#">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My GitHub Portfolio. Built with ❤️</p>
+        <p>Visit my <a href="https://github.com/yourusername" target="_blank">GitHub Profile</a></p>
+    </footer>
+
+</body>
+</html>
