@@ -1,0 +1,140 @@
+import pygame
+import random
+import sys
+
+# Initialize pygame
+pygame.init()
+
+# Screen settings
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Top-Down Shooter")
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+
+# Clock and FPS
+clock = pygame.time.Clock()
+FPS = 60
+
+# Player class
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((50, 50))
+        self.image.fill(BLUE)
+        self.rect = self.image.get_rect()
+        self.rect.center = (WIDTH // 2, HEIGHT - 60)
+        self.speed = 5
+
+    def update(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] and self.rect.left > 0:
+            self.rect.x -= self.speed
+        if keys[pygame.K_RIGHT] and self.rect.right < WIDTH:
+            self.rect.x += self.speed
+        if keys[pygame.K_UP] and self.rect.top > 0:
+            self.rect.y -= self.speed
+        if keys[pygame.K_DOWN] and self.rect.bottom < HEIGHT:
+            self.rect.y += self.speed
+
+# Bullet class
+class Bullet(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.Surface((10, 20))
+        self.image.fill(WHITE)
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.speed = -7
+
+    def update(self):
+        self.rect.y += self.speed
+        if self.rect.bottom < 0:
+            self.kill()
+
+# Enemy class
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((50, 50))
+        self.image.fill(RED)
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, WIDTH - self.rect.width)
+        self.rect.y = random.randint(-100, -40)
+        self.speed = random.randint(3, 6)
+
+    def update(self):
+        self.rect.y += self.speed
+        if self.rect.top > HEIGHT:
+            self.rect.x = random.randint(0, WIDTH - self.rect.width)
+            self.rect.y = random.randint(-100, -40)
+            self.speed = random.randint(3, 6)
+
+# Groups
+all_sprites = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
+enemies = pygame.sprite.Group()
+
+# Player instance
+player = Player()
+all_sprites.add(player)
+
+# Spawning enemies
+for _ in range(8):
+    enemy = Enemy()
+    all_sprites.add(enemy)
+    enemies.add(enemy)
+
+# Game variables
+score = 0
+running = True
+
+# Font
+font = pygame.font.SysFont("Arial", 24)
+
+# Game loop
+while running:
+    clock.tick(FPS)
+    
+    # Event handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                bullet = Bullet(player.rect.centerx, player.rect.top)
+                all_sprites.add(bullet)
+                bullets.add(bullet)
+
+    # Updates
+    all_sprites.update()
+
+    # Collision detection
+    hits = pygame.sprite.groupcollide(enemies, bullets, True, True)
+    for hit in hits:
+        score += 1
+        enemy = Enemy()
+        all_sprites.add(enemy)
+        enemies.add(enemy)
+
+    if pygame.sprite.spritecollideany(player, enemies):
+        running = False
+
+    # Drawing
+    screen.fill(BLACK)
+    all_sprites.draw(screen)
+
+    # Score display
+    score_text = font.render(f"Score: {score}", True, WHITE)
+    screen.blit(score_text, (10, 10))
+
+    # Flip the display
+    pygame.display.flip()
+
+pygame.quit()
+sys.exit()
